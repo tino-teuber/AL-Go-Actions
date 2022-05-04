@@ -1,0 +1,41 @@
+name: PowerShell script
+author: Freddy Kristiansen
+permissions:
+  contents: write
+  pull-requests: write
+inputs:
+  actor:
+    description: The GitHub actor running the action
+    required: false
+    default: ${{ github.actor }}
+  token:
+    description: The GitHub token running the action
+    required: false
+    default: ${{ github.token }}
+  parentTelemetryScopeJson:
+    description: Specifies the parent telemetry scope for the telemetry signal
+    required: false
+    default: '{}'
+  environmentName:
+    description: Name of the online environment
+    required: true
+  adminCenterApiCredentials:
+    description: Admin center API credentials
+    required: false
+    default: ''
+  reUseExistingEnvironment:
+    description: Reuse environment if it exists
+    required: false
+    default: 'N'
+  directCommit:
+    description: Direct Commit (Y/N)
+    required: false
+    default: 'N'
+runs:
+  using: composite
+  steps:
+    - run: ${{ github.action_path }}/CreateDevelopmentEnvironment.ps1 -actor '${{ inputs.actor }}' -token '${{ inputs.token }}' -parentTelemetryScopeJson '${{ inputs.parentTelemetryScopeJson }}' -environmentName '${{ inputs.environmentName }}' -adminCenterApiCredentials '${{ inputs.adminCenterApiCredentials }}' -reUseExistingEnvironment ('${{ inputs.reUseExistingEnvironment }}' -eq 'Y') -directCommit ('${{ inputs.directCommit }}' -eq 'Y')
+      shell: PowerShell
+branding:
+  icon: terminal
+  color: blue
