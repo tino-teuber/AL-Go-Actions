@@ -5,7 +5,7 @@ Param(
     [string] $token,
     [Parameter(HelpMessage = "Specifies the parent telemetry scope for the telemetry signal", Mandatory = $false)]
     [string] $parentTelemetryScopeJson = '{}',
-    [Parameter(HelpMessage = "Project name if the repository is setup for multiple projects (* for all projects)", Mandatory = $false)]
+    [Parameter(HelpMessage = "Project name if the repository is setup for multiple projects (. for all projects)", Mandatory = $false)]
     [string] $project = '.',
     [Parameter(HelpMessage = "New version number (Major.Minor)", Mandatory = $true)]
     [string] $versionnumber,
